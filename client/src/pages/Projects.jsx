@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import ProjectCard from '../components/ProjectCard.jsx'
 
 const Projects = () => {
   const [projects, setProjects] = useState([])
@@ -10,15 +11,14 @@ const Projects = () => {
   }, [])
 
   return (
-    <div>
-      {projects.map(p => (
-        <div key={p._id}>
-          <h2>{p.title}</h2>
-          <p>{p.description}</p>
-          <a href={p.liveUrl}>Live</a> | <a href={p.githubUrl}>GitHub</a>
-        </div>
-      ))}
-    </div>
+    <section id="projects" className="py-12">
+      <h2 className="text-4xl font-bold text-center mb-12 text-blue-400">Projects</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {projects.map(p => (
+          <ProjectCard key={p._id} project={p} />
+        ))}
+      </div>
+    </section>
   )
 }
 
