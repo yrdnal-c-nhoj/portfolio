@@ -5,7 +5,40 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      // Font Families
+      fontFamily: {
+        sans: ['Verdana', 'sans-serif'],
+        heading: ['Oswald', 'sans-serif'],
+      },
+      
+      // Color Palette
+      colors: {
+        heading: '#1a365d',  // Navy blue for headings
+        body: '#333333',    // Dark gray for body text
+      },
+      
+      // Custom box shadows
+      boxShadow: {
+        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+        'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+      },
+      
+      // Component utility classes
+      utilityClasses: {
+        'project-title': {
+          fontFamily: 'Oswald, sans-serif',
+          fontWeight: '600',
+          fontSize: '1.25rem',
+          color: '#1a365d',
+        },
+        'project-description': {
+          fontFamily: 'Verdana, sans-serif',
+          fontSize: '0.875rem',
+          color: '#333333',
+        },
+      },
+    },
   },
   plugins: [],
 }

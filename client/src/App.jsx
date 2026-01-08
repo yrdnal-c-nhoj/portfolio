@@ -1,14 +1,25 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Projects from './pages/Projects'
-import Admin from './pages/Admin'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Projects from './pages/Projects';
+import Admin from './pages/Admin';
+import TypographyPreview from './components/TypographyPreview';
 
-const App = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Projects />} />
-      <Route path="/admin" element={<Admin />} />
-    </Routes>
-  </BrowserRouter>
-)
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Projects />,
+  },
+  {
+    path: "/typography",
+    element: <TypographyPreview />,
+  },
+  {
+    path: "/admin",
+    element: <Admin />,
+  },
+]);
 
-export default App
+const App = () => {
+  return <RouterProvider router={router} />;
+};
+
+export default App;

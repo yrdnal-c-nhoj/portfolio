@@ -65,11 +65,11 @@ const Admin = () => {
   }
 
   return (
-    <div className="min-h-screen text-white bg-gray-900">
+    <div className="text-white bg-gray-900 page-container">
       {/* Navigation */}
       <nav className="p-4 bg-gray-800">
         <div className="flex items-center justify-between max-w-6xl mx-auto">
-          <Link to="/" className="text-xl font-bold text-blue-400 hover:text-blue-300">
+          <Link to="/" className="text-xl font-bold text-heading hover:text-blue-300">
             ← Back to Portfolio
           </Link>
           <span className="text-gray-400">Admin Dashboard</span>
@@ -77,18 +77,18 @@ const Admin = () => {
       </nav>
 
       <div className="max-w-6xl px-4 py-8 mx-auto">
-        <h1 className="mb-12 text-4xl font-bold text-center text-blue-400">Admin Dashboard</h1>
+        <h1 className="mb-12 text-4xl font-bold text-center text-heading">Admin Dashboard</h1>
 
         {/* Add/Edit Form */}
         <div className="p-6 mb-8 bg-gray-800 rounded-lg">
-          <h2 className="mb-6 text-2xl font-semibold text-white">
+          <h2 className="mb-6 text-2xl font-semibold text-heading">
             {editingId ? 'Edit Project' : 'Add New Project'}
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block mb-1 text-sm text-gray-400">Title *</label>
+              <label className="form-label">Title *</label>
               <input
-                className="w-full px-4 py-2 text-white bg-gray-700 border border-gray-600 rounded focus:border-blue-500 focus:outline-none"
+                className="form-input"
                 placeholder="Project Title"
                 value={form.title}
                 onChange={e => setForm({...form, title: e.target.value})}
@@ -96,9 +96,9 @@ const Admin = () => {
               />
             </div>
             <div>
-              <label className="block mb-1 text-sm text-gray-400">Description *</label>
+              <label className="form-label">Description *</label>
               <textarea
-                className="w-full px-4 py-2 text-white bg-gray-700 border border-gray-600 rounded focus:border-blue-500 focus:outline-none"
+                className="form-input"
                 placeholder="Project Description"
                 rows="3"
                 value={form.description}
@@ -107,27 +107,27 @@ const Admin = () => {
               />
             </div>
             <div>
-              <label className="block mb-1 text-sm text-gray-400">Live URL</label>
+              <label className="form-label">Live URL</label>
               <input
-                className="w-full px-4 py-2 text-white bg-gray-700 border border-gray-600 rounded focus:border-blue-500 focus:outline-none"
+                className="form-input"
                 placeholder="https://..."
                 value={form.liveUrl}
                 onChange={e => setForm({...form, liveUrl: e.target.value})}
               />
             </div>
             <div>
-              <label className="block mb-1 text-sm text-gray-400">GitHub URL</label>
+              <label className="form-label">GitHub URL</label>
               <input
-                className="w-full px-4 py-2 text-white bg-gray-700 border border-gray-600 rounded focus:border-blue-500 focus:outline-none"
+                className="form-input"
                 placeholder="https://github.com/..."
                 value={form.githubUrl}
                 onChange={e => setForm({...form, githubUrl: e.target.value})}
               />
             </div>
             <div>
-              <label className="block mb-1 text-sm text-gray-400">Technologies (comma separated)</label>
+              <label className="form-label">Technologies (comma separated)</label>
               <input
-                className="w-full px-4 py-2 text-white bg-gray-700 border border-gray-600 rounded focus:border-blue-500 focus:outline-none"
+                className="form-input"
                 placeholder="React, Node.js, MongoDB"
                 value={form.tech}
                 onChange={e => setForm({...form, tech: e.target.value})}
@@ -136,7 +136,7 @@ const Admin = () => {
             <div className="flex gap-4">
               <button
                 type="submit"
-                className="px-6 py-2 text-white transition-colors duration-200 bg-blue-600 rounded hover:bg-blue-700"
+                className="btn-primary"
               >
                 {editingId ? 'Update Project' : 'Add Project'}
               </button>
@@ -144,7 +144,7 @@ const Admin = () => {
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="px-6 py-2 text-white transition-colors duration-200 bg-gray-600 rounded hover:bg-gray-700"
+                  className="btn-secondary"
                 >
                   Cancel
                 </button>
@@ -155,7 +155,7 @@ const Admin = () => {
 
         {/* Projects List */}
         <div>
-          <h2 className="mb-6 text-2xl font-semibold text-white">Existing Projects ({projects.length})</h2>
+          <h2 className="mb-6 text-2xl font-semibold text-heading">Existing Projects ({projects.length})</h2>
           {projects.length === 0 ? (
             <p className="text-gray-400">No projects yet. Add one above!</p>
           ) : (
@@ -163,11 +163,11 @@ const Admin = () => {
               {projects.map(project => (
                 <div key={project._id} className="flex items-center justify-between p-4 bg-gray-800 rounded-lg">
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-white">{project.title}</h3>
+                    <h3 className="text-lg font-semibold text-heading">{project.title}</h3>
                     <p className="mt-1 text-sm text-gray-400">{project.description.substring(0, 80)}...</p>
                     <div className="flex gap-2 mt-2">
                       {project.tech.slice(0, 3).map((t, i) => (
-                        <span key={i} className="px-2 py-1 text-xs text-blue-400 bg-gray-700 rounded">
+                        <span key={i} className="card-tech-badge">
                           {t}
                         </span>
                       ))}
@@ -181,13 +181,13 @@ const Admin = () => {
                   <div className="flex gap-2 ml-4">
                     <button
                       onClick={() => handleEdit(project)}
-                      className="px-4 py-2 text-white transition-colors duration-200 bg-yellow-600 rounded hover:bg-yellow-700"
+                      className="btn-warning"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(project._id)}
-                      className="px-4 py-2 text-white transition-colors duration-200 bg-red-600 rounded hover:bg-red-700"
+                      className="btn-danger"
                     >
                       Delete
                     </button>
