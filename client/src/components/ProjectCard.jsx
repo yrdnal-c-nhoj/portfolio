@@ -2,16 +2,14 @@ const ProjectCard = ({ project }) => (
   <div className="p-3 bg-gray-300 rounded-lg shadow-md font-body">
     <div>
       <div className="mb-0 text-3xl italic tracking-tighter font-display">{project.title}</div>
-      <div className="mb-3 text-lg font-body">{project.description}</div>
-      <div className="mb-3">
-        <span className="text-xs font-label">TECHNOLOGIES:</span>
-        <div className="flex flex-wrap gap-2 mt-1">
+      <div className="mb-4 text-lg leading-tight font-body">{project.description}</div>
+        <span className="text-xs tracking-wide font-label">TECHNOLOGIES:</span>
+        <div className="flex flex-wrap gap-2 mt-0 mb-5">
           {project.tech.map((tech, index) => (
-            <span key={index} className="px-2 py-1 text-xs rounded font-body">
+            <span key={index} className="px-2 py-1 text-lg rounded font-body">
               {tech}
             </span>
           ))}
-        </div>
       </div>
 
       <div className="flex gap-4">
@@ -19,7 +17,7 @@ const ProjectCard = ({ project }) => (
           href={project.liveUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="px-4 py-2 text-sm font-medium transition-colors rounded bg-gray-50 hover:bg-blue-300 font-label"
+          className="btn btn-primary"
         >
           Live Demo
         </a>
@@ -27,7 +25,7 @@ const ProjectCard = ({ project }) => (
           href={project.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-         className="px-4 py-2 text-sm font-medium transition-colors rounded bg-gray-50 hover:bg-blue-300 font-label"
+         className="btn btn-primary"
        >
           GitHub
         </a>
