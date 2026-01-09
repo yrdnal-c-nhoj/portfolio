@@ -42,18 +42,22 @@ const Projects = () => {
   }
 
   return (
-    <div className="min-h-screen page-container bg-slate-700">
-      <header className="mb-2 shadow-lg bg-lime-50">
+    <div className="relative min-h-screen p-3 page-container bg-slate-700 ">
+      <div className="absolute border-transparent pointer-events-none" />
+      <header className="mb-2 ">
         <div className="header-container">
           <div className="flex items-center justify-between">
-            <h1 className="mb-2 text-5xl font-bold font-heading text-heading">John C. Landry</h1>
-            <h1 className="mb-2 text-4xl font-bold text-right font-heading text-heading">MERN Stack Portfolio</h1>
+            <div className="text-5xl text-left pagetop">John C. Landry</div> 
+            <div className="flex flex-col -space-y-1 text-2xl text-right">
+              <span className="pagetop">MERN Stack</span>
+              <span className="pagetop">Portfolio</span>
+            </div>
           </div>
         </div>
       </header>
       <main className="section-container">
         <section id="projects" className="prose-project">
-          <h2 className="mb-3 text-4xl font-medium text-center font-heading text-heading">Projects</h2>
+          <div className='flex justify-center text-xl pagetop'>Projects</div>
           {projects.length === 0 ? (
             <p className="text-xl text-center text-white">No projects found.</p>
           ) : (

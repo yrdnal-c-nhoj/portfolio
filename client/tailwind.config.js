@@ -9,13 +9,13 @@ export default {
       // Font Families
       fontFamily: {
         sans: ['Verdana', 'sans-serif'],
-        heading: ['Oswald', 'sans-serif'],
+        heading: ['Inter Tight', 'sans-serif'],
       },
       
       // Color Palette
       colors: {
-        heading: '#1a365d',  // Navy blue for headings
-        body: '#333333',    // Dark gray for body text
+        heading: '#CDD6E2',  // Navy blue for headings
+        body: '#EEE6E6',    // Dark gray for body text
       },
       
       // Custom box shadows
@@ -23,22 +23,31 @@ export default {
         'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
         'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
       },
-      
-      // Component utility classes
-      utilityClasses: {
-        'project-title': {
-          fontFamily: 'Oswald, sans-serif',
-          fontWeight: '600',
-          fontSize: '1.25rem',
-          color: '#1a365d',
-        },
-        'project-description': {
-          fontFamily: 'Verdana, sans-serif',
-          fontSize: '0.875rem',
-          color: '#333333',
-        },
-      },
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      addUtilities({
+        '.pagetop': {
+          color: '#ECF9F1',
+          fontFamily: 'Fraunces, serif',
+        },
+        '.project-title': {
+          fontFamily: 'Fraunces, serif',     fontWeight: '500',
+          fontSize: '1.25rem',
+          color: '#E8ECF3',
+        },
+        '.project-description': {
+          fontFamily: 'Source Serif 4, serif',
+          fontSize: '0.875rem',
+          color: '#F1E7E7',
+        },
+          '.miscandlinks': {
+          fontFamily: 'Source Serif 4, serif',
+          fontSize: '0.875rem',
+          color: '#EAE1E1',
+        },
+      })
+    },
+  ],
 }

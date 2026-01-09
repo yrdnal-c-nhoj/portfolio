@@ -1,8 +1,8 @@
 const ProjectCard = ({ project }) => (
-  <div className="card bg-slate-300">
+  <div className="p-3 card bg-slate-950">
     <div className="card-header">
-      <h3 className="project-title">{project.title}</h3>
-      <h4 className="project-description">{project.description}</h4>
+      <div className="project-title">{project.title}</div>
+      <div className="project-description">{project.description}</div>
       <div className="mb-4">
         <span className="card-tech-label">Technologies:</span>
         <div className="flex flex-wrap gap-2 mt-1">
