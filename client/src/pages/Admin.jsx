@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const API = import.meta.env.VITE_API_URL + '/projects'
+const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+const API = `${baseUrl}${baseUrl.endsWith('/api') ? '' : '/api'}/projects`
 
 const Admin = () => {
   const [projects, setProjects] = useState([])
@@ -67,19 +68,19 @@ const Admin = () => {
   return (
     <div className="font-body">
       <nav className="p-4">
-        <div className="flex items-center justify-between max-w-6xl mx-auto">
-          <Link to="/" className="text-xl font-bold">
+        <div className="flex justify-between items-center mx-auto max-w-6xl">
+          <Link to="/" className="font-bold text-xl">
             ← Back to Portfolio
           </Link>
           <span>Admin Dashboard</span>
         </div>
       </nav>
 
-      <div className="max-w-6xl px-4 py-8 mx-auto">
-        <h1 className="mb-12 text-4xl font-bold text-center">Admin Dashboard</h1>
+      <div className="mx-auto px-4 py-8 max-w-6xl">
+        <h1 className="mb-12 font-bold text-4xl text-center">Admin Dashboard</h1>
 
-        <div className="p-6 mb-8 rounded-lg">
-          <h2 className="mb-6 text-2xl font-semibold">
+        <div className="mb-8 p-6 rounded-lg">
+          <h2 className="mb-6 font-semibold text-2xl">
             {editingId ? 'Edit Project' : 'Add New Project'}
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -145,24 +146,24 @@ const Admin = () => {
         </div>
 
         <div>
-          <h2 className="mb-6 text-2xl font-semibold">Existing Projects ({projects.length})</h2>
+          <h2 className="mb-6 font-semibold text-2xl">Existing Projects ({projects.length})</h2>
           {projects.length === 0 ? (
             <p>No projects yet. Add one above!</p>
           ) : (
             <div className="space-y-4">
               {projects.map(project => (
-                <div key={project._id} className="flex items-center justify-between p-4 rounded-lg">
+                <div key={project._id} className="flex justify-between items-center p-4 rounded-lg">
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold">{project.title}</h3>
+                    <h3 className="font-semibold text-lg">{project.title}</h3>
                     <p className="mt-1 text-sm">{project.description.substring(0, 80)}...</p>
                     <div className="flex gap-2 mt-2">
                       {project.tech.slice(0, 3).map((t, i) => (
-                        <span key={i} className="px-2 py-1 text-xs rounded font-label">
+                        <span key={i} className="px-2 py-1 rounded font-label text-xs">
                           {t}
                         </span>
                       ))}
                       {project.tech.length > 3 && (
-                        <span className="px-2 py-1 text-xs rounded font-label">
+                        <span className="px-2 py-1 rounded font-label text-xs">
                           +{project.tech.length - 3}
                         </span>
                       )}
