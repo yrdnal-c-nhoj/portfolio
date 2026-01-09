@@ -52,7 +52,7 @@ const Projects = () => {
       <main>
         <section id="projects">
           {projects.length === 0 ? (
-            <p className="text-xl text-center">No projects found</p>
+            <p className="text-xl text-center">No projects found.</p>
           ) : (
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               {projects.map((project) => (
