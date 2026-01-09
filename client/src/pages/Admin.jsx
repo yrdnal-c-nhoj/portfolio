@@ -65,30 +65,28 @@ const Admin = () => {
   }
 
   return (
-    <div className="text-white bg-gray-900 page-container">
-      {/* Navigation */}
-      <nav className="p-4 bg-gray-800">
+    <div className="font-body">
+      <nav className="p-4">
         <div className="flex items-center justify-between max-w-6xl mx-auto">
-          <Link to="/" className="text-xl font-bold text-heading hover:text-blue-300">
+          <Link to="/" className="text-xl font-bold">
             ← Back to Portfolio
           </Link>
-          <span className="text-gray-400">Admin Dashboard</span>
+          <span>Admin Dashboard</span>
         </div>
       </nav>
 
       <div className="max-w-6xl px-4 py-8 mx-auto">
-        <h1 className="mb-12 text-4xl font-bold text-center text-heading">Admin Dashboard</h1>
+        <h1 className="mb-12 text-4xl font-bold text-center">Admin Dashboard</h1>
 
-        {/* Add/Edit Form */}
-        <div className="p-6 mb-8 bg-gray-800 rounded-lg">
-          <h2 className="mb-6 text-2xl font-semibold text-heading">
+        <div className="p-6 mb-8 rounded-lg">
+          <h2 className="mb-6 text-2xl font-semibold">
             {editingId ? 'Edit Project' : 'Add New Project'}
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="form-label">Title *</label>
+              <label className="font-label">Title *</label>
               <input
-                className="form-input"
+                className="font-label"
                 placeholder="Project Title"
                 value={form.title}
                 onChange={e => setForm({...form, title: e.target.value})}
@@ -96,9 +94,9 @@ const Admin = () => {
               />
             </div>
             <div>
-              <label className="form-label">Description *</label>
+              <label className="font-label">Description *</label>
               <textarea
-                className="form-input"
+                className="font-label"
                 placeholder="Project Description"
                 rows="3"
                 value={form.description}
@@ -107,45 +105,38 @@ const Admin = () => {
               />
             </div>
             <div>
-              <label className="form-label">Live URL</label>
+              <label className="font-label">Live URL</label>
               <input
-                className="form-input"
+                className="font-label"
                 placeholder="https://..."
                 value={form.liveUrl}
                 onChange={e => setForm({...form, liveUrl: e.target.value})}
               />
             </div>
             <div>
-              <label className="form-label">GitHub URL</label>
+              <label className="font-label">GitHub URL</label>
               <input
-                className="form-input"
+                className="font-label"
                 placeholder="https://github.com/..."
                 value={form.githubUrl}
                 onChange={e => setForm({...form, githubUrl: e.target.value})}
               />
             </div>
             <div>
-              <label className="form-label">Technologies (comma separated)</label>
+              <label className="font-label">Technologies (comma separated)</label>
               <input
-                className="form-input"
+                className="font-label"
                 placeholder="React, Node.js, MongoDB"
                 value={form.tech}
                 onChange={e => setForm({...form, tech: e.target.value})}
               />
             </div>
             <div className="flex gap-4">
-              <button
-                type="submit"
-                className="btn-primary"
-              >
+              <button type="submit" className="font-label">
                 {editingId ? 'Update Project' : 'Add Project'}
               </button>
               {editingId && (
-                <button
-                  type="button"
-                  onClick={resetForm}
-                  className="btn-secondary"
-                >
+                <button type="button" onClick={resetForm} className="font-label">
                   Cancel
                 </button>
               )}
@@ -153,42 +144,35 @@ const Admin = () => {
           </form>
         </div>
 
-        {/* Projects List */}
         <div>
-          <h2 className="mb-6 text-2xl font-semibold text-heading">Existing Projects ({projects.length})</h2>
+          <h2 className="mb-6 text-2xl font-semibold">Existing Projects ({projects.length})</h2>
           {projects.length === 0 ? (
-            <p className="text-gray-400">No projects yet. Add one above!</p>
+            <p>No projects yet. Add one above!</p>
           ) : (
             <div className="space-y-4">
               {projects.map(project => (
-                <div key={project._id} className="flex items-center justify-between p-4 bg-gray-800 rounded-lg">
+                <div key={project._id} className="flex items-center justify-between p-4 rounded-lg">
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-heading">{project.title}</h3>
-                    <p className="mt-1 text-sm text-gray-400">{project.description.substring(0, 80)}...</p>
+                    <h3 className="text-lg font-semibold">{project.title}</h3>
+                    <p className="mt-1 text-sm">{project.description.substring(0, 80)}...</p>
                     <div className="flex gap-2 mt-2">
                       {project.tech.slice(0, 3).map((t, i) => (
-                        <span key={i} className="card-tech-badge">
+                        <span key={i} className="px-2 py-1 text-xs rounded font-label">
                           {t}
                         </span>
                       ))}
                       {project.tech.length > 3 && (
-                        <span className="px-2 py-1 text-xs text-gray-400 bg-gray-700 rounded">
+                        <span className="px-2 py-1 text-xs rounded font-label">
                           +{project.tech.length - 3}
                         </span>
                       )}
                     </div>
                   </div>
                   <div className="flex gap-2 ml-4">
-                    <button
-                      onClick={() => handleEdit(project)}
-                      className="btn-warning"
-                    >
+                    <button onClick={() => handleEdit(project)} className="font-label">
                       Edit
                     </button>
-                    <button
-                      onClick={() => handleDelete(project._id)}
-                      className="btn-danger"
-                    >
+                    <button onClick={() => handleDelete(project._id)} className="font-label">
                       Delete
                     </button>
                   </div>
