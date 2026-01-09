@@ -1,9 +1,9 @@
 const ProjectCard = ({ project }) => (
   <div className="p-3 bg-gray-300 rounded-lg shadow-md font-body">
     <div>
-      <div className="mb-2 text-xl font-display">{project.title}</div>
-      <div className="mb-4 font-body">{project.description}</div>
-      <div className="mb-4">
+      <div className="mb-0 text-3xl italic tracking-tighter font-display">{project.title}</div>
+      <div className="mb-3 text-lg font-body">{project.description}</div>
+      <div className="mb-3">
         <span className="text-xs font-label">TECHNOLOGIES:</span>
         <div className="flex flex-wrap gap-2 mt-1">
           {project.tech.map((tech, index) => (
@@ -19,7 +19,7 @@ const ProjectCard = ({ project }) => (
           href={project.liveUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="px-4 py-2 text-sm font-medium transition-colors rounded bg-gray-50 hover:bg-blue-700 font-label"
+          className="px-4 py-2 text-sm font-medium transition-colors rounded bg-gray-50 hover:bg-blue-300 font-label"
         >
           Live Demo
         </a>
@@ -27,8 +27,8 @@ const ProjectCard = ({ project }) => (
           href={project.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="px-4 py-2 text-sm font-medium transition-colors rounded bg-gray-50 hover:bg-gray-600 font-label"
-        >
+         className="px-4 py-2 text-sm font-medium transition-colors rounded bg-gray-50 hover:bg-blue-300 font-label"
+       >
           GitHub
         </a>
       </div>

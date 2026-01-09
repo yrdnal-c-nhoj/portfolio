@@ -46,7 +46,7 @@ const Projects = () => {
       <header className="mb-2">
         <div>
           <div className="text-6xl font-display">John C. Landry</div>
-          <div className="text-3xl font-display">MERN Stack Portfolio</div>
+          <div className="mb-4 text-5xl font-display">MERN Stack Portfolio</div>
         </div>
       </header>
       <main>

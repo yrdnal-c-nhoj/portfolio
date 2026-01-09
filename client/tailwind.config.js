@@ -7,9 +7,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['Playfair Display', 'serif'],
-        body: ['Georgia', 'serif'],
-        label: ['Roboto Mono', 'monospace'],
+        display: ['Oxanium', 'sans-serif'],
+        body: ['Outfit', 'sans-serif'],
+        label: ['Inter', 'sans-serif'],
       },
     },
   },
