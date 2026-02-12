@@ -28,7 +28,7 @@ const Projects = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen">
         <p className="text-xl"> </p>
       </div>
     )
@@ -36,18 +36,18 @@ const Projects = () => {
 
   if (error) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen">
         <p className="text-xl">Error loading projects: {error}</p>
       </div>
     )
   }
 
   return (
-    <div className="relative p-3 min-h-screen">
-      <header className="mb-2 p-1">
+    <div className="relative min-h-screen p-3">
+      <header className="p-1 mb-2">
         <div>
-          <div className="mb-2 font-display text-5xl">John C. Landry</div>
-          <div className="mb-3 font-display text-4xl">MERN Stack Portfolio</div>
+          <div className="mb-2 text-5xl font-display">John C. Landry </div>
+          <div className="mb-3 text-4xl font-display">MERN Stack Portfolio</div>
         </div>
       </header>
       <main>
@@ -55,7 +55,7 @@ const Projects = () => {
           {projects.length === 0 ? (
             <p className="text-xl text-center">No projects found.</p>
           ) : (
-            <div className="gap-8 grid grid-cols-1 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               {projects.map((project) => (
                 <ProjectCard key={project._id} project={project} />
               ))}
