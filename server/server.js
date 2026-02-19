@@ -9,7 +9,7 @@ connectDB();
 
 const app = express();
 
-// CORS configuration – FIXED for your actual Vercel URL
+// CORS configuration
 const allowedOrigins = [
   'https://portfolio-sand-mu-xkv3dqgohg.vercel.app',
   'http://localhost:5173',
@@ -18,6 +18,7 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
+    // !origin allows UptimeRobot and tools like Postman to connect
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -31,14 +32,28 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+// --- ROUTES ---
+
+// 1. Existing Project Routes
 app.use('/api/projects', projectRoutes);
 
+// 2. Main API Entry Point
 app.get('/', (req, res) => {
   res.send('API Running');
 });
 
-// Use Render's PORT env var
+// 3. The Keep-Alive Ping Route for UptimeRobot
+app.get('/ping', (req, res) => {
+  console.log('Keep-alive ping received at:', new Date().toISOString());
+  res.status(200).send("I am awake!");
+});
+
+// --- SERVER SETUP ---
+
 const PORT = process.env.PORT || 10000;
+
+// Important: Use 0.0.0.0 for Render to ensure it binds correctly
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
 });
