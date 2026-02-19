@@ -2,7 +2,7 @@
   "name": "portfolio",
   "version": "1.0.0",
   "scripts": {
-    "start": "nose server.js",
+    "start": "node server.js",
     "build": "cd client && npm install && npm run build",
     "dev": "concurrently \"cd client && npm run dev\" \"cd server && npm run dev\""
   },
