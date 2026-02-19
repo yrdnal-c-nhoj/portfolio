@@ -1,0 +1,30 @@
+name: Keep Backend Alive
+
+on:
+  schedule:
+    # Runs every 10 minutes between 6am and 10pm UTC (1am-5pm EST)
+    - cron: '*/10 6-22 * * *'
+  # Allow manual triggers from the GitHub UI
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Backend
+        run: |
+          # Replace with your actual backend URL
+          BACKEND_URL="https://portfolio-sand-mu-xkv3dqgohg.vercel.app/"
+          
+          echo "🔄 Pinging $BACKEND_URL at $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          
+          # Make the request and capture the response
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" $BACKEND_URL)
+          
+          # Check if the request was successful
+          if [ "$RESPONSE" -eq 200 ] || [ "$RESPONSE" -eq 301 ] || [ "$RESPONSE" -eq 302 ]; then
+            echo "✅ Success! Backend responded with status: $RESPONSE"
+          else
+            echo "❌ Error! Backend responded with status: $RESPONSE"
+            exit 1
+          fi
