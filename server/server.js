@@ -1,33 +1,44 @@
-import express from 'express'
-import cors from 'cors'
-import dotenv from 'dotenv'
-import connectDB from './config/db.js'
-import projectRoutes from './routes/projectRoutes.js'
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import connectDB from './config/db.js';
+import projectRoutes from './routes/projectRoutes.js';
 
-dotenv.config()
-connectDB()
+dotenv.config();
+connectDB();
 
-const app = express()
+const app = express();
 
-// Update this with your actual Vercel URL!
+// CORS configuration – FIXED for your actual Vercel URL
+const allowedOrigins = [
+  'https://portfolio-sand-mu-xkv3dqgohg.vercel.app',
+  'http://localhost:5173',
+  'http://localhost:3000',
+];
+
 app.use(cors({
-  origin: 'https://your-portfolio.vercel.app', 
-  methods: ['GET', 'POST'],
-  credentials: true
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log(`CORS rejected origin: ${origin}`);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-app.use(express.json())
-
-app.use('/api/projects', projectRoutes)
+app.use(express.json());
+app.use('/api/projects', projectRoutes);
 
 app.get('/', (req, res) => {
-  res.send('API Running')
-})
+  res.send('API Running');
+});
 
-// Render provides a PORT environment variable. 
-// We MUST use it, or the Health Check will fail.
+// Use Render's PORT env var
 const PORT = process.env.PORT || 10000;
-
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
 });
