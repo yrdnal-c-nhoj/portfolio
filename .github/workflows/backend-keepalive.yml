@@ -1,0 +1,126 @@
+name: Backend Keep-Alive
+
+on:
+  schedule:
+    # Runs every 10 minutes between 6am and 10pm UTC (1am-5pm EST)
+    - cron: '*/10 6-22 * * *'
+  # Allow manual triggers from the GitHub UI
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to ping (vercel or render)'
+        required: true
+        default: 'vercel'
+        type: choice
+        options:
+          - vercel
+          - render
+
+# Set a timeout of 5 minutes for the entire workflow
+# This will cancel the workflow if it runs longer than 5 minutes
+# This is a safety measure to prevent infinite runs
+# The actual ping should complete in seconds
+# This is just a safety net
+# The default is 6 hours, which is too long for this workflow
+timeout-minutes: 5
+
+jobs:
+  ping-vercel:
+    name: Ping Vercel Backend
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'vercel')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5  # 5 minutes per job
+    env:
+      BACKEND_URL: ${{ secrets.VERCEL_BACKEND_URL || 'https://portfolio-sand-mu-xkv3dqgohg.vercel.app/' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Ping Vercel Backend
+        id: ping
+        timeout-minutes: 2  # 2 minutes for the ping step
+        run: |
+          echo "🔄 Pinging Vercel backend at $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          echo "Target URL: ${{ env.BACKEND_URL }}"
+          
+          # Set curl options
+          CURL_OPTS=(
+            "-s"  # Silent mode
+            "-o" "/dev/null"  # Don't output the response body
+            "-w" "%{http_code}"  # Only output the status code
+            "--max-time" "30"  # 30 second timeout
+            "--retry" "2"  # Retry up to 2 times on failure
+            "--retry-delay" "5"  # Wait 5 seconds between retries
+          )
+          
+          # Make the request and capture the response
+          set +e  # Don't fail on error
+          RESPONSE=$(curl "${CURL_OPTS[@]}" "${{ env.BACKEND_URL }}")
+          CURL_EXIT_CODE=$?
+          set -e  # Re-enable error checking
+          
+          # Check if curl command failed
+          if [ $CURL_EXIT_CODE -ne 0 ]; then
+            echo "❌ Error: curl failed with exit code $CURL_EXIT_CODE"
+            echo "This usually indicates a network issue or DNS resolution failure"
+            exit 1
+          fi
+          
+          # Check the HTTP status code
+          if [[ "$RESPONSE" =~ ^(200|301|302)$ ]]; then
+            echo "✅ Success! Backend responded with status: $RESPONSE"
+          else
+            echo "❌ Error! Backend responded with status: $RESPONSE"
+            echo "This might indicate that the backend is down or misconfigured"
+            exit 1
+          fi
+
+  ping-render:
+    name: Ping Render Backend
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'render')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5  # 5 minutes per job
+    env:
+      BACKEND_URL: ${{ secrets.RENDER_BACKEND_URL || 'https://your-render-backend-url.onrender.com' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Ping Render Backend
+        id: ping
+        timeout-minutes: 2  # 2 minutes for the ping step
+        run: |
+          echo "🔄 Pinging Render backend at $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          echo "Target URL: ${{ env.BACKEND_URL }}"
+          
+          # Set curl options
+          CURL_OPTS=(
+            "-s"  # Silent mode
+            "-o" "/dev/null"  # Don't output the response body
+            "-w" "%{http_code}"  # Only output the status code
+            "--max-time" "30"  # 30 second timeout
+            "--retry" "2"  # Retry up to 2 times on failure
+            "--retry-delay" "5"  # Wait 5 seconds between retries
+          )
+          
+          # Make the request and capture the response
+          set +e  # Don't fail on error
+          RESPONSE=$(curl "${CURL_OPTS[@]}" "${{ env.BACKEND_URL }}")
+          CURL_EXIT_CODE=$?
+          set -e  # Re-enable error checking
+          
+          # Check if curl command failed
+          if [ $CURL_EXIT_CODE -ne 0 ]; then
+            echo "❌ Error: curl failed with exit code $CURL_EXIT_CODE"
+            echo "This usually indicates a network issue or DNS resolution failure"
+            exit 1
+          fi
+          
+          # Check the HTTP status code
+          if [[ "$RESPONSE" =~ ^(200|301|302)$ ]]; then
+            echo "✅ Success! Backend responded with status: $RESPONSE"
+          else
+            echo "❌ Error! Backend responded with status: $RESPONSE"
+            echo "This might indicate that the backend is down or misconfigured"
+            exit 1
+          fi
