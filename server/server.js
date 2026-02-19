@@ -9,9 +9,9 @@ connectDB()
 
 const app = express()
 
-// REPLACE YOUR OLD app.use(cors()) WITH THIS:
+// Update this with your actual Vercel URL!
 app.use(cors({
-  origin: 'https://your-portfolio.vercel.app', // <-- CHANGE THIS to your actual Vercel URL
+  origin: 'https://your-portfolio.vercel.app', 
   methods: ['GET', 'POST'],
   credentials: true
 }));
@@ -24,6 +24,8 @@ app.get('/', (req, res) => {
   res.send('API Running')
 })
 
+// Render provides a PORT environment variable. 
+// We MUST use it, or the Health Check will fail.
 const PORT = process.env.PORT || 10000;
 
 app.listen(PORT, '0.0.0.0', () => {
