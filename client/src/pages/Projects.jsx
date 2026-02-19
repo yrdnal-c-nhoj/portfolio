@@ -47,7 +47,7 @@ const Projects = () => {
       <header className="p-1 mb-2">
         <div>
           <div className="mb-2 text-5xl font-display">John C. Landry</div>
-          <div className="mb-3 text-4xl font-display">MERN Stack Portfolio </div>
+          <div className="mb-3 text-4xl font-display">MERN Stack Portfolio</div>
         </div>
       </header>
       <main>
