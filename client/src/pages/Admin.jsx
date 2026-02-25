@@ -146,7 +146,7 @@ const Admin = () => {
         </div>
 
         <div>
-          <h2 className="mb-6 font-semibold text-2xl">Existing Projects ({projects.length})</h2>
+          <h2 className="mb-6 font-semibold text-2xl">My Existing Projects ({projects.length})</h2>
           {projects.length === 0 ? (
             <p>No projects yet. Add one above!</p>
           ) : (
