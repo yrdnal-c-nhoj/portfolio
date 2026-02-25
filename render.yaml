@@ -8,11 +8,5 @@ services:
       - key: PORT
         value: 10000
       - key: MONGODB_URI
-        fromDatabase:
-          name: mongodb
-          property:connectionString.standardSrv
+        value: mongodb+srv://cubistheart_db_user:TLAGHqUW3ZacmSzW@chlclusterfun0.kkwdfs4.mongodb.net/mye?retryWrites=true&w=majority
     plan: free
-databases:
-  - name: mongodb
-    databaseName: portfolio
-    user: portfolio_user
