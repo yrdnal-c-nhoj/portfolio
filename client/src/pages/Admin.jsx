@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
-const API = `${baseUrl}${baseUrl.endsWith('/api') ? '' : '/api'}/projects`
+const API = '/api/projects'
 
 const Admin = () => {
   const [projects, setProjects] = useState([])
@@ -12,7 +11,19 @@ const Admin = () => {
   const [editingId, setEditingId] = useState(null)
 
   const load = () =>
-    fetch(API).then(r => r.json()).then(setProjects)
+    fetch(API)
+      .then(r => {
+        if (!r.ok) {
+          throw new Error(`HTTP error! status: ${r.status}`);
+        }
+        return r.json();
+      })
+      .then(setProjects)
+      .catch(error => {
+        console.error('Error loading projects:', error);
+        console.error('API URL:', API);
+        console.error('Current origin:', window.location.origin);
+      })
 
   useEffect(() => {
     load()
@@ -30,16 +41,38 @@ const Admin = () => {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
-      }).then(() => {
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        return response.json()
+      })
+      .then(() => {
         load()
         resetForm()
+      })
+      .catch(error => {
+        console.error('Error updating project:', error)
+        alert('Failed to update project. Please check the console for details.')
       })
     } else {
       fetch(API, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
-      }).then(load)
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        return response.json()
+      })
+      .then(load)
+      .catch(error => {
+        console.error('Error creating project:', error)
+        alert('Failed to create project. Please check the console for details.')
+      })
     }
   }
 
