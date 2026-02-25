@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import ProjectCard from '../components/ProjectCard.jsx'
 
+const baseUrl = import.meta.env.VITE_API_URL || '';
+const API = baseUrl ? `${baseUrl}/api/projects` : '/api/projects';
+
 const Projects = () => {
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(true)
@@ -9,7 +12,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch('/api/projects')
+        const response = await fetch(API)
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
