@@ -9,7 +9,7 @@ module.exports = {
       fontFamily: {
         display: ['Oxanium', 'sans-serif'],
         body: ['Outfit', 'sans-serif'],
-        label: ['Roboto Slab', 'serif'],
+        label: ['Roboto', 'sans-serif'],
       },
     },
   },
