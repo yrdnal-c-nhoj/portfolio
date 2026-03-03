@@ -8,8 +8,8 @@ module.exports = {
     extend: {
       fontFamily: {
         display: ['Oxanium', 'sans-serif'],
-        body: ['Outfit', 'sans-serif'],
-        label: ['Roboto', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+        label: ['Roboto Slab', 'serif'],
       },
     },
   },
