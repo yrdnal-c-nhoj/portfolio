@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "694490df7c2626cea6cb90f6",
+    "title": "BorrowedTime Updated",
+    "description": "Creative visual website with strong UI/UX and animation - Updated",
+    "liveUrl": "https://www.cubistheart.com/",
+    "githubUrl": "https://github.com/yrdnal-c-nhoj/CHL",
+    "tech": ["React", "CSS", "UI/UX"],
+    "__v": 0
+  },
+  {
+    "_id": "694490df7c2626cea6cb90f7",
+    "title": "MERN Todo App",
+    "description": "Full MERN CRUD application with MongoDB persistence.",
+    "liveUrl": "https://mern-todo-gules.vercel.app",
+    "githubUrl": "https://github.com/yrdnal-c-nhoj/mern-todo",
+    "tech": ["MongoDB", "Express", "React", "Node"],
+    "__v": 0
+  },
+  {
+    "_id": "694490df7c2626cea6cb90f8",
+    "title": "NASA Picture of the Day",
+    "description": "API-driven React app using NASA's public API.",
+    "liveUrl": "https://nasapod-five.vercel.app",
+    "githubUrl": "https://github.com/yrdnal-c-nhoj/nasapod",
+    "tech": ["React", "REST API"],
+    "__v": 0
+  },
+  {
+    "_id": "694490df7c2626cea6cb90f9",
+    "title": "Employee Database",
+    "description": "Employee management system with backend data handling.",
+    "liveUrl": "https://employee-database-nu.vercel.app",
+    "githubUrl": "https://github.com/yrdnal-c-nhoj/employee_database",
+    "tech": ["MongoDB", "Express", "React", "Node"],
+    "__v": 0
+  }
+]

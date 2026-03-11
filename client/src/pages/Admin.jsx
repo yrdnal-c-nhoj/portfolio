@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const baseUrl = import.meta.env.VITE_API_URL || '';
-const API = baseUrl ? `${baseUrl}/api/projects` : '/api/projects'
+// For development, use local API. For production, consider using a static JSON approach
+const API = '/api/projects'
 
 const Admin = () => {
   const [projects, setProjects] = useState([])

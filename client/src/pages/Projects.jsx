@@ -1,45 +1,25 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import ProjectCard from '../components/ProjectCard.jsx'
-
-const baseUrl = import.meta.env.VITE_API_URL || '';
-const API = baseUrl ? `${baseUrl}/api/projects` : '/api/projects';
+import { getProjects } from '../data/projects.js'
 
 const Projects = () => {
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await fetch(API)
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
-        }
-        const data = await response.json()
-        setProjects(data)
-      } catch (err) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
-      }
-    }
+    // Load projects from JSON data
+    const timer = setTimeout(() => {
+      setProjects(getProjects())
+      setLoading(false)
+    }, 300)
 
-    fetchProjects()
+    return () => clearTimeout(timer)
   }, [])
 
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <p className="text-xl"> </p>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <p className="text-xl">Error loading projects: {error}</p>
       </div>
     )
   }
