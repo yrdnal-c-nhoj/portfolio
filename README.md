@@ -1,6 +1,6 @@
 # MERN Stack Portfolio
 
-A full-stack developer portfolio application built with MongoDB, Express, React, and Node.js. This project showcases web development projects with a modern, responsive design and includes an admin dashboard for content management.
+A full-stack developer portfolio application built with MongoDB, Express, React and Node.js. This project showcases web development projects with a modern, responsive design and includes an admin dashboard for content management.
 
 ## 🚀 Features
 
