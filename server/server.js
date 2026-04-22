@@ -10,12 +10,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const result = dotenv.config({ path: path.join(__dirname, '.env') });
-if (result.error) {
-  console.error('Error loading .env file:', result.error);
-} else {
-  console.log('.env file loaded successfully from:', path.join(__dirname, '.env'));
-}
+// Load .env if present (local dev), but don't fail if missing (Render uses dashboard env vars)
+dotenv.config({ path: path.join(__dirname, '.env'), silent: true });
 connectDB();
 
 const app = express();
