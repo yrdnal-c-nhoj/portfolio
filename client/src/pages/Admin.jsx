@@ -10,70 +10,55 @@ const Admin = () => {
     title: '', description: '', liveUrl: '', githubUrl: '', tech: ''
   })
   const [editingId, setEditingId] = useState(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const load = () =>
-    fetch(API)
-      .then(r => {
-        if (!r.ok) {
-          throw new Error(`HTTP error! status: ${r.status}`);
-        }
-        return r.json();
-      })
-      .then(setProjects)
-      .catch(error => {
-        console.error('Error loading projects:', error);
-        console.error('API URL:', API);
-        console.error('Current origin:', window.location.origin);
-      })
+  const load = async () => {
+    try {
+      const response = await fetch(API)
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+      const data = await response.json()
+      setProjects(data)
+    } catch (error) {
+      console.error('Error loading projects:', error)
+    }
+  }
 
   useEffect(() => {
     load()
   }, [])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsSubmitting(true)
+    
     const payload = {
       ...form,
       tech: form.tech.split(',').map(t => t.trim())
     }
 
-    if (editingId) {
-      fetch(API + '/' + editingId, {
-        method: 'PUT',
+    try {
+      const url = editingId ? `${API}/${editingId}` : API
+      const method = editingId ? 'PUT' : 'POST'
+      
+      const response = await fetch(url, {
+        method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
-        }
-        return response.json()
-      })
-      .then(() => {
-        load()
+
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+      
+      await load()
+      if (editingId) {
         resetForm()
-      })
-      .catch(error => {
-        console.error('Error updating project:', error)
-        alert('Failed to update project. Please check the console for details.')
-      })
-    } else {
-      fetch(API, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
-        }
-        return response.json()
-      })
-      .then(load)
-      .catch(error => {
-        console.error('Error creating project:', error)
-        alert('Failed to create project. Please check the console for details.')
-      })
+      } else {
+        setForm({ title: '', description: '', liveUrl: '', githubUrl: '', tech: '' })
+      }
+    } catch (error) {
+      console.error('Error saving project:', error)
+      alert('Failed to save project. Check console for details.')
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -93,9 +78,14 @@ const Admin = () => {
     setForm({ title: '', description: '', liveUrl: '', githubUrl: '', tech: '' })
   }
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (confirm('Are you sure you want to delete this project?')) {
-      fetch(API + '/' + id, { method: 'DELETE' }).then(load)
+      try {
+        await fetch(`${API}/${id}`, { method: 'DELETE' })
+        await load()
+      } catch (error) {
+        console.error('Error deleting project:', error)
+      }
     }
   }
 
@@ -167,8 +157,8 @@ const Admin = () => {
               />
             </div>
             <div className="flex gap-4">
-              <button type="submit" className="font-label">
-                {editingId ? 'Update Project' : 'Add Project'}
+              <button type="submit" disabled={isSubmitting} className="font-label">
+                {isSubmitting ? 'Saving...' : (editingId ? 'Update Project' : 'Add Project')}
               </button>
               {editingId && (
                 <button type="button" onClick={resetForm} className="font-label">
