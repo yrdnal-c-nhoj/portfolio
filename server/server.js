@@ -10,7 +10,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load .env if present (local dev), but don't fail if missing (Render uses dashboard env vars)
+// Load .env if present (local dev), but don't fail if missing
 dotenv.config({ path: path.join(__dirname, '.env'), silent: true });
 connectDB();
 
@@ -25,7 +25,7 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    // !origin allows UptimeRobot and tools like Postman to connect
+    // !origin allows internal tools and Postman to connect
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -50,17 +50,10 @@ app.get('/', (req, res) => {
   res.send('API Running');
 });
 
-// 3. The Keep-Alive Ping Route for UptimeRobot
-app.get('/ping', (req, res) => {
-  console.log('Keep-alive ping received at:', new Date().toISOString());
-  res.status(200).send("I am awake!");
-});
-
 // --- SERVER SETUP ---
 
 const PORT = process.env.PORT || 10000;
 
-// Important: Use 0.0.0.0 for Render to ensure it binds correctly
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

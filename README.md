@@ -9,7 +9,7 @@ A full-stack developer portfolio application built with MongoDB, Express, React 
 - **Responsive Design**: Mobile-first design using Tailwind CSS
 - **Real-time Updates**: Instant project management with database persistence
 - **Modern Stack**: Built with the latest MERN stack technologies
-- **Deployment Ready**: Configured for production deployment on Vercel (frontend) and Render (backend)
+- **Deployment Ready**: Configured for production deployment on Vercel (frontend) and your preferred Node.js host.
 
 ## 🛠️ Tech Stack
 
@@ -165,27 +165,6 @@ The admin dashboard provides full CRUD functionality for managing projects:
 
 2. **Environment Variables**
    - Set `VITE_API_URL` to your backend URL in Vercel dashboard
-
-### Backend (Render)
-
-1. **Create `render.yaml`**
-   ```yaml
-   services:
-     - type: web
-       name: portfolio-backend
-       env: node
-       buildCommand: npm install
-       startCommand: npm start
-       envVars:
-         - key: PORT
-           value: 10000
-         - key: MONGODB_URI
-           value: mongodb+srv://username:password@cluster.mongodb.net/portfolio
-   ```
-
-2. **Connect GitHub Repository**
-   - Link your GitHub repo to Render
-   - Deploy automatically on push to main branch
 
 ### Database (MongoDB Atlas)
 
