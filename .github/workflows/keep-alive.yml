@@ -14,7 +14,19 @@ jobs:
       - name: Ping Backend
         run: |
           # Replace with your actual backend URL
-          BACKEND_URL="https://portfolio-sand-mu-xkv3dqgohg.vercel.app/"
+<!-- Example of how to use the documentation you have on your portfolio site -->
+<div class="prose dark:prose-invert lg:prose-xl">
+  <!-- Content rendered from your MongoDB/MERN backend -->
+  <h1>Project Title</h1>
+  <p>Detailed description goes here...</p>
+</div>
+// In your server-side controller
+const projects = await mquery(ProjectCollection)
+  .find({ visible: true })
+  .select('title description tags imageUrl githubUrl') // Only return what the UI needs
+  .sort('-createdAt')
+  .exec();
+          BACKEND_URL="https://portfolio-k7acescoa-johns-projects-75897040.vercel.app/"
           
           echo "🔄 Pinging $BACKEND_URL at $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
           

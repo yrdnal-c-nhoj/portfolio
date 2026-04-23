@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5  # 5 minutes per job
     env:
-      BACKEND_URL: ${{ secrets.VERCEL_BACKEND_URL || 'https://portfolio-sand-mu-xkv3dqgohg.vercel.app/' }}
+      BACKEND_URL: ${{ secrets.VERCEL_BACKEND_URL || 'https://portfolio-k7acescoa-johns-projects-75897040.vercel.app/' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
