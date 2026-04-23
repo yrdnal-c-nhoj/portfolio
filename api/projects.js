@@ -5,11 +5,9 @@ import mongoose from 'mongoose'
 const projectSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  technologies: [{ type: String }],
-  imageUrl: { type: String },
+  tech: [{ type: String }],
   liveUrl: { type: String },
-  repoUrl: { type: String },
-  createdAt: { type: Date, default: Date.now }
+  githubUrl: { type: String }
 })
 
 const Project = mongoose.models.Project || mongoose.model('Project', projectSchema)
@@ -19,7 +17,7 @@ export async function GET(req) {
     if (!mongoose.connection.readyState) {
       await mongoose.connect(process.env.MONGODB_URI)
     }
-    const projects = await Project.find().sort({ createdAt: -1 })
+    const projects = await Project.find()
     return Response.json(projects)
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 })

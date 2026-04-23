@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-// For development, use local API. For production, consider using a static JSON approach
 const API = '/api/projects'
 
 const Admin = () => {
@@ -30,7 +29,7 @@ const Admin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
+
     const payload = {
       ...form,
       tech: form.tech.split(',').map(t => t.trim())
@@ -39,7 +38,7 @@ const Admin = () => {
     try {
       const url = editingId ? `${API}/${editingId}` : API
       const method = editingId ? 'PUT' : 'POST'
-      
+
       const response = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
@@ -47,7 +46,7 @@ const Admin = () => {
       })
 
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
-      
+
       await load()
       if (editingId) {
         resetForm()

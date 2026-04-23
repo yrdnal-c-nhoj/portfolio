@@ -5,7 +5,6 @@ A full-stack portfolio application showcasing web development projects.
 ## Live Demo
 
 - **Frontend:** https://portfolio-sand-mu-xkv3dqgohg.vercel.app/
-- **API:** https://portfolio-2zuu.onrender.com/
 
 ## Tech Stack
 
@@ -61,10 +60,7 @@ VITE_API_URL=http://localhost:5001/api
 cd client
 vercel --prod
 ```
-Set `VITE_API_URL` to your Render URL in the Vercel dashboard.
-
-### Backend (Render)
-Push to GitHub, connect repo in Render dashboard, and set `MONGODB_URI` in environment variables.
+Set `VITE_API_URL` to your API URL in the Vercel dashboard.
 
 ---
 
