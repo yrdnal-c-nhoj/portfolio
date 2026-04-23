@@ -10,15 +10,15 @@ on:
 jobs:
   ping:
     runs-on: ubuntu-latest
+    env:
+      BACKEND_URL: ${{ secrets.VERCEL_BACKEND_URL || 'https://portfolio-k7acescoa-johns-projects-75897040.vercel.app/' }}
     steps:
       - name: Ping Backend
         run: |
-          BACKEND_URL="https://portfolio-k7acescoa-johns-projects-75897040.vercel.app/"
-          
-          echo "🔄 Pinging $BACKEND_URL at $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          echo "🔄 Pinging ${{ env.BACKEND_URL }} at $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
           
           # Make the request with a timeout and capture the response
-          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 $BACKEND_URL)
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 ${{ env.BACKEND_URL }})
           
           # Check if the request was successful
           if [ "$RESPONSE" -eq 200 ] || [ "$RESPONSE" -eq 301 ] || [ "$RESPONSE" -eq 302 ]; then
