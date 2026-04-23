@@ -1,0 +1,27 @@
+# Project Personal Notes
+
+## 🛡️ Admin Access
+To add, edit, or delete projects, you need to access the Admin Dashboard. 
+*   **Local URL:** [http://localhost:5173/admin](http://localhost:5173/admin)
+*   **Production URL:** Access the `/admin` route on your deployed Vercel URL.
+
+The dashboard provides a simplified interface for CRUD (Create, Read, Update, Delete) operations that interact directly with your MongoDB database through the Express API.
+
+## ⚡ Pinging & Sleep Prevention
+Free-tier hosting platforms like **Render** (used for the backend) often put services to "sleep" after 15–30 minutes of inactivity. To prevent this "cold start" delay for visitors:
+*   The server exposes a `GET /ping` health-check endpoint.
+*   This endpoint is designed to be called periodically by an external monitoring service (like UptimeRobot or a simple cron job) to keep the backend instance active and responsive.
+
+## 🏗️ System Architecture & Workflow
+The application is a standard **MERN** (MongoDB, Express, React, Node) stack application.
+
+### How it works:
+1.  **Database:** MongoDB Atlas stores your project data in the cloud.
+2.  **Backend (Server):** A Node.js/Express server acts as the bridge. It uses Mongoose to model the data and provides RESTful endpoints (`/api/projects`) for the frontend.
+3.  **Frontend (Client):** A React application built with Vite and Tailwind CSS. It fetches data from the API to display projects to visitors and provides the admin interface.
+4.  **Integration:** 
+    *   During development, the root `package.json` uses the `concurrently` package to run both the Vite dev server and the Nodemon backend server simultaneously.
+    *   The frontend uses environment variables (`VITE_API_URL`) to know where to send requests, whether on `localhost` or your production backend on Render.
+
+### Setup Summary:
+I set this up by modularizing the folders into `client` and `server`. The backend handles the data persistence and CORS security, while the frontend handles the routing (via React Router) and the user experience. This separation makes it easy to deploy the two parts to different specialized hosting providers (Vercel for static frontend, Render for the dynamic backend).

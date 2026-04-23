@@ -26,3 +26,9 @@ coverage/
 
 # Misc
 *.local
+
+# Private notes (local only, not on GitHub)
+notes.md
+PRIVATE.md
+*.private.md
+notes/
