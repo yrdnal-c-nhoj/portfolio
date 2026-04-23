@@ -9,7 +9,7 @@ A full-stack developer portfolio application built with MongoDB, Express, React 
 - **Responsive Design**: Mobile-first design using Tailwind CSS
 - **Real-time Updates**: Instant project management with database persistence
 - **Modern Stack**: Built with the latest MERN stack technologies
-- **Deployment Ready**: Configured for production deployment on Vercel (frontend) and your preferred Node.js host.
+- **Deployment Ready**: Configured for production deployment on Vercel (frontend) and your choice of Node.js host.
 
 ## 🛠️ Tech Stack
 
@@ -190,7 +190,7 @@ PORT=5001
 #### Client (.env)
 ```env
 VITE_API_URL=http://localhost:5001  # For local development
-VITE_API_URL=https://your-backend.onrender.com  # For production
+VITE_API_URL=https://your-backend-url.com  # For production
 ```
 
 ### CORS Configuration

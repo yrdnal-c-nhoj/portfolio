@@ -1,23 +1,24 @@
 # 📝 Project Personal Notes
 
 ## 🛡️ Admin Access
-To add, edit, or delete projects in your portfolio, you need to access the Admin Dashboard.
-*   **URL:** Navigate to the `/admin` route on your domain (e.g., `http://localhost:5173/admin` for local development).
-*   **Functionality:** This route is handled in `client/src/App.jsx`. It provides a user interface to perform CRUD (Create, Read, Update, Delete) operations on your project data.
+To add, edit, or delete projects in your portfolio, navigate to the `/admin` route on your active domain.
+
+*   **Local Admin:** http://localhost:5173/admin
+*   **Production Admin:** https://portfolio-sand-mu-xkv3dqgohg.vercel.app/admin
+*   **Preview Admin:** https://portfolio-k7acescoa-johns-projects-75897040.vercel.app/admin
 
 ## 🏗️ System Architecture & Workflow
-The application is built using the **MERN** stack (MongoDB, Express, React, Node.js).
+The application is a full-stack **MERN** application.
 
-### How it works:
-1.  **Database:** Your project data is stored in **MongoDB Atlas**. This is a cloud-based database that holds the titles, descriptions, tech stacks, and links for your portfolio.
-2.  **Backend (API):** A Node.js server using the Express framework. It connects to MongoDB via Mongoose. It acts as the "brain," receiving requests from your website, verifying permissions, and talking to the database.
-3.  **Frontend (UI):** A React application built with Vite and Tailwind CSS. It is the visual part users interact with. It fetches data from your backend API to display your projects dynamically.
-4.  **Integration:** 
-    *   The frontend uses an environment variable (`VITE_API_URL`) to know exactly where the backend is located.
-    *   During development, the root `package.json` uses `concurrently` to run both the frontend and backend servers at the same time with a single command: `npm run dev`.
+1.  **Database:** Hosted on **MongoDB Atlas**. It stores your project details (titles, descriptions, links, tech stack).
+2.  **Backend (API):** A Node.js/Express server. It connects to MongoDB using Mongoose and serves the data through REST endpoints (`/api/projects`).
+3.  **Frontend (UI):** A React application built with Vite and Tailwind CSS. It is the visual part that users see.
+4.  **Integration:**
+    *   The frontend uses the `VITE_API_URL` environment variable to know where your backend is hosted.
+    *   **CORS Security:** The backend only accepts requests from the specific URLs listed in the `allowedOrigins` array in `server/server.js`.
 
-### Deployment:
-The project is designed to be split. The frontend is hosted on **Vercel** (which is optimized for React/Vite), and the backend can be hosted on any Node.js-compatible environment.
+## 🚀 Deployment
+*   **Frontend:** Hosted on **Vercel**. Every time you push to GitHub, Vercel creates a new "Preview" URL and updates the "Production" URL.
+*   **Backend:** Can be hosted on any Node.js provider. Note that you have removed Render-specific "ping" logic, so ensure your new host provides high availability.
 
----
-*Note: This file is ignored by Git (via .gitignore) to keep your private notes out of the public repository.*
+*Note: This file is ignored by Git to keep your notes private.*
