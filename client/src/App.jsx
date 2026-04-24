@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Projects from './pages/Projects';
 import Admin from './pages/Admin';
 import TypographyPreview from './components/TypographyPreview';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from '@vercel/analytics/react';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +20,12 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <Analytics />
+    </>
+  );
 };
 
 export default App;
