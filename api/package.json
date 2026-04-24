@@ -5,5 +5,8 @@
   "main": "projects.js",
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "mongoose": "^8.5.0"
   }
 }
