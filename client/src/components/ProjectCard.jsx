@@ -10,7 +10,7 @@ const ProjectCard = ({ project }) => (
         </span>
       ))}
     </div>
-    <div className="flex gap-4">
+    <div className="flex gap-4 text-xs">
       <a
         href={project.liveUrl}
         target="_blank"
