@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Projects from './pages/Projects';
 import Admin from './pages/Admin';
 import TypographyPreview from './components/TypographyPreview';
+import { Analytics } from "@vercel/analytics/next"
 
 const router = createBrowserRouter([
   {

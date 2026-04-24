@@ -2,11 +2,12 @@
   "name": "portfolio",
   "version": "1.0.0",
   "scripts": {
-    "start": "node server/server.js", 
+    "start": "node server/server.js",
     "build": "cd client && npm install && npm run build",
     "dev": "concurrently \"cd client && npm run dev\" \"cd server && npm run dev\""
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "mongoose": "^8.5.0"
   }
 }
