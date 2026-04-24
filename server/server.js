@@ -18,8 +18,6 @@ const app = express();
 
 // CORS configuration
 const allowedOrigins = [
-  'https://portfolio-sand-mu-xkv3dqgohg.vercel.app',
-  'https://portfolio-k7acescoa-johns-projects-75897040.vercel.app',
   'http://localhost:5173',
   'http://localhost:5174',
   'http://localhost:5175',
